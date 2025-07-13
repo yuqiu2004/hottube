@@ -9,7 +9,7 @@
 
   <name>HotTube</name>
   <modules>
-    <module>auth</module>
+    <module>user</module>
     <module>browse</module>
     <module>interact</module>
     <module>search</module>

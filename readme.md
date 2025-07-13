@@ -20,7 +20,7 @@ But from project architecture to function depth, it will be quite different from
 
 ### services
 
-1. auth: Unified authentication and authorization、 User management and friend management
+1. user: Unified authentication and authorization、 User management and friend management
 2. video: Video uploading, transcoding, and storage services
 3. search: Video search
 4. interact: Video interaction, including likes, collections, and comments
