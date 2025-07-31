@@ -14,7 +14,7 @@ But from project architecture to function depth, it will be quite different from
 
 - Oracle Java17
 - Intellij IDEA 2024
-- Git etc.
+- Git DockerDesktop Maven etc.
 
 ## Project Architecture
 
@@ -28,8 +28,8 @@ But from project architecture to function depth, it will be quite different from
 
 ## Tech Selection
 
-- service communication: Spring Cloud gRPC
-- 
+- service communication: Dubbo
+- registry center & config center: nacos
 
 ## Build
 
