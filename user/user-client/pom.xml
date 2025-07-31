@@ -3,19 +3,14 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.ht</groupId>
-        <artifactId>HotTube</artifactId>
+        <artifactId>user</artifactId>
         <version>1.0</version>
     </parent>
 
-    <modules>
-        <module>user-client</module>
-        <module>user-server</module>
-    </modules>
+    <artifactId>user-client</artifactId>
+    <packaging>jar</packaging>
 
-    <artifactId>user</artifactId>
-    <packaging>pom</packaging>
-
-    <name>user</name>
+    <name>user-client</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

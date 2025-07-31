@@ -4,6 +4,11 @@ This is a video share platform which encourage people upload their original vide
 
 # About project
 
+## services
+
+- user:
+  - port: 8081
+
 ## Source
 
 Original from JavaEE Course Design which I cooperated with friends.
