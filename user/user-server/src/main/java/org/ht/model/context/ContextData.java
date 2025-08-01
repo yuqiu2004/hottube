@@ -2,7 +2,7 @@ package org.ht.model.context;
 
 public class ContextData {
 
-    private static ThreadLocal<Integer> userId;
+    private static ThreadLocal<Integer> userId = new ThreadLocal<>();
 
     public static void setUserId(int uid) {
         userId.set(uid);
