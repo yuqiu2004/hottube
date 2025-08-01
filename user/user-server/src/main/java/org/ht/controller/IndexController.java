@@ -4,10 +4,7 @@ import jakarta.annotation.Resource;
 import org.ht.model.request.RegisterRequest;
 import org.ht.model.request.LoginRequest;
 import org.ht.model.request.UpdateUserRequest;
-import org.ht.model.response.RegisterResponse;
-import org.ht.model.response.LoginResponse;
-import org.ht.model.response.UserInfoResponse;
-import org.ht.model.response.Resp;
+import org.ht.model.response.*;
 import org.ht.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,6 +36,12 @@ public class IndexController {
     @PutMapping("/info/{uid}")
     public Resp<UserInfoResponse> updateUserInfo(@PathVariable Integer uid, @RequestBody UpdateUserRequest request) {
         UserInfoResponse resp = userService.updateUserInfo(uid, request);
+        return Resp.success(resp);
+    }
+
+    @GetMapping("/upload/image/{imageName}")
+    public Resp<UploadImageResponse> uploadImage(@PathVariable String imageName) {
+        UploadImageResponse resp = userService.uploadImage(imageName);
         return Resp.success(resp);
     }
 }

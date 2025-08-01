@@ -5,6 +5,7 @@ import org.ht.model.request.LoginRequest;
 import org.ht.model.request.UpdateUserRequest;
 import org.ht.model.response.RegisterResponse;
 import org.ht.model.response.LoginResponse;
+import org.ht.model.response.UploadImageResponse;
 import org.ht.model.response.UserInfoResponse;
 
 public interface UserService {
@@ -17,4 +18,5 @@ public interface UserService {
 
     UserInfoResponse updateUserInfo(Integer uid, UpdateUserRequest request);
 
+    UploadImageResponse uploadImage(String imageName);
 }

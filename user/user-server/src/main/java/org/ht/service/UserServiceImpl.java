@@ -9,8 +9,10 @@ import org.ht.model.request.LoginRequest;
 import org.ht.model.request.UpdateUserRequest;
 import org.ht.model.response.RegisterResponse;
 import org.ht.model.response.LoginResponse;
+import org.ht.model.response.UploadImageResponse;
 import org.ht.model.response.UserInfoResponse;
 import org.ht.model.vo.UserVo;
+import org.ht.util.MinioUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,9 @@ public class UserServiceImpl implements UserService {
 
     @Resource
     private UserMapper userMapper;
+
+    @Resource
+    private MinioUtil minioUtil;
 
     @Override
     public RegisterResponse register(RegisterRequest request) {
@@ -94,5 +99,11 @@ public class UserServiceImpl implements UserService {
         UserVo userVo = new UserVo();
         BeanUtils.copyProperties(user, userVo);
         return UserInfoResponse.builder().userVo(userVo).build();
+    }
+
+    @Override
+    public UploadImageResponse uploadImage(String imageName) {
+        String url = minioUtil.preview(imageName);
+        return UploadImageResponse.builder().url(url).build();
     }
 }
