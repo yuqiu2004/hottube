@@ -12,6 +12,7 @@ import org.ht.model.response.LoginResponse;
 import org.ht.model.response.UploadImageResponse;
 import org.ht.model.response.UserInfoResponse;
 import org.ht.model.vo.UserVo;
+import org.ht.util.JwtUtil;
 import org.ht.util.MinioUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,9 @@ public class UserServiceImpl implements UserService {
 
     @Resource
     private MinioUtil minioUtil;
+
+    @Resource
+    private JwtUtil jwtUtil;
 
     @Override
     public RegisterResponse register(RegisterRequest request) {
@@ -60,8 +64,8 @@ public class UserServiceImpl implements UserService {
         if (user == null || !Objects.equals(user.getPassword(), request.getPassword())) {
             throw new RuntimeException("用户名或密码错误");
         }
-        // 生成token（此处简化为uid字符串）
-        String token = String.valueOf(user.getUid());
+        // 生成token
+        String token = jwtUtil.createJWT(user.getUid());
         LoginResponse resp = new LoginResponse();
         resp.setToken(token);
         UserVo userVo = new UserVo();

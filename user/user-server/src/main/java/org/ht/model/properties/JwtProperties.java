@@ -1,18 +1,16 @@
 package org.ht.model.properties;
 
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
+@ConfigurationProperties(prefix = "jwt")
 @Data
-@ConfigurationProperties(prefix = "minio")
-public class MinioProperties {
+public class JwtProperties {
 
-    private String endpoint;
-    private String accessKey;
     private String secretKey;
-    private String bucket;
+    private int ttl;
+    private String tokenName;
 
 }

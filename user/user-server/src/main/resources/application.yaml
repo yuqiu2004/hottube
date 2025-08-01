@@ -19,3 +19,8 @@ minio:
   accesskey: yuqiu
   secretkey: yuqiu123
   bucket: ht-user
+
+jwt:
+  secret-key: ht-user
+  ttl: 7200000
+  token-name: token
