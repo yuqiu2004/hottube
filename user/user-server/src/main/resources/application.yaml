@@ -24,3 +24,10 @@ jwt:
   secret-key: ht-user
   ttl: 7200000
   token-name: token
+
+dubbo:
+  application:
+    name: ht-user
+  registry:
+    address: nacos://localhost:8848 # ?username=nacos&password=nacos
+    register-mode: instance
