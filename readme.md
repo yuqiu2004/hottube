@@ -31,6 +31,8 @@ But from project architecture to function depth, it will be quite different from
 4. interact: Video interaction, including likes, collections, and comments
 5. browse: Website browsing, including video recommendations, video retrieval, and section retrieval
 
+- nginx: redirect all request to each service
+
 ## Tech Selection
 
 - service communication: Dubbo
