@@ -28,7 +28,7 @@ But from project architecture to function depth, it will be quite different from
 1. user: Unified authentication and authorization、 User management and friend management
 2. video: Video uploading, transcoding, and storage services
 3. search: Video search
-4. interact: Video interaction, including likes, collections, and comments
+4. interact: Video interaction, including likes, collections, and comments; User interaction, including subscribe, message
 5. browse: Website browsing, including video recommendations, video retrieval, and section retrieval
 
 - nginx: redirect all request to each service

@@ -8,9 +8,13 @@
     </parent>
 
     <artifactId>video</artifactId>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
     <name>video</name>
+    <modules>
+        <module>video-client</module>
+        <module>video-server</module>
+    </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
