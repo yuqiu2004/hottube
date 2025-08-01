@@ -3,18 +3,15 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.ht</groupId>
-        <artifactId>HotTube</artifactId>
+        <artifactId>browse</artifactId>
         <version>1.0</version>
     </parent>
 
-    <artifactId>browse</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>browse-client</artifactId>
+    <packaging>jar</packaging>
 
-    <name>browse</name>
-    <modules>
-        <module>browse-client</module>
-        <module>browse-server</module>
-    </modules>
+    <name>browse-client</name>
+    <url>http://maven.apache.org</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
