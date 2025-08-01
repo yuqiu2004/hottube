@@ -4,9 +4,22 @@ CREATE TABLE video_metadata (
                                 title VARCHAR(255) NOT NULL,
                                 description VARCHAR(1000),
                                 cover_url VARCHAR(512),
-                                video_url VARCHAR(512) NOT NULL,
-                                duration_seconds INT DEFAULT 0, -- 视频时长（秒）
-                                creator_id BIGINT NOT NULL,     -- 作者/UP主 ID
+
+                                original_url VARCHAR(512) DEFAULT NULL,
+                                original_bitrate INT DEFAULT NULL,                 -- kbps
+                                original_exists TINYINT DEFAULT 0,                 -- 1存在，0不存在
+
+                                p720_url VARCHAR(512) DEFAULT NULL,
+                                p720_bitrate INT DEFAULT NULL,
+                                p720_exists TINYINT DEFAULT 0,
+
+                                p360_url VARCHAR(512) DEFAULT NULL,
+                                p360_bitrate INT DEFAULT NULL,
+                                p360_exists TINYINT DEFAULT 0,
+
+                                duration_seconds INT DEFAULT 0,
+                                play_count BIGINT DEFAULT 0 COMMENT '播放量',
+                                creator_id BIGINT NOT NULL,
                                 status TINYINT DEFAULT 1 COMMENT '1=发布, 0=待审, 2=下架',
                                 create_time DATETIME DEFAULT CURRENT_TIMESTAMP,
                                 update_time DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
