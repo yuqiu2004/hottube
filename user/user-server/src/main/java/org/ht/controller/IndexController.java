@@ -1,6 +1,6 @@
 package org.ht.controller;
 
-import jakarta.annotation.Resource;
+import javax.annotation.Resource;
 import org.ht.model.request.RegisterRequest;
 import org.ht.model.request.LoginRequest;
 import org.ht.model.request.UpdateUserRequest;

@@ -4,7 +4,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import jakarta.annotation.Resource;
+import javax.annotation.Resource;
 import org.ht.constant.Constant;
 import org.ht.model.properties.JwtProperties;
 import org.springframework.stereotype.Component;

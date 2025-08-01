@@ -4,7 +4,7 @@ import io.micrometer.common.util.StringUtils;
 import io.minio.*;
 import io.minio.http.Method;
 import io.minio.messages.Bucket;
-import jakarta.annotation.Resource;
+import javax.annotation.Resource;
 import org.ht.model.properties.MinioProperties;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;

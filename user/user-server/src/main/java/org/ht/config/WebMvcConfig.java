@@ -1,6 +1,6 @@
 package org.ht.config;
 
-import jakarta.annotation.Resource;
+import javax.annotation.Resource;
 import org.ht.interceptor.IndexInterceptor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

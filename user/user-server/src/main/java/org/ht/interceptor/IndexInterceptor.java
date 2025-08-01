@@ -1,9 +1,9 @@
 package org.ht.interceptor;
 
 import io.jsonwebtoken.Claims;
-import jakarta.annotation.Resource;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.ht.constant.Constant;
 import org.ht.model.context.ContextData;
 import org.ht.model.properties.JwtProperties;

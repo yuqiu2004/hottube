@@ -1,7 +1,7 @@
 package org.ht.config;
 
 import io.minio.MinioClient;
-import jakarta.annotation.Resource;
+import javax.annotation.Resource;
 import org.ht.model.properties.MinioProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
