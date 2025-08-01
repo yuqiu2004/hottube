@@ -16,7 +16,7 @@ public class Resp<T> {
     }
 
     public static <T> Resp<T> success(T data) {
-        return new Resp<>(200, "成功", data);
+        return new Resp<>(200, "success", data);
     }
 
     public static <T> Resp<T> success(String msg, T data) {
@@ -24,7 +24,7 @@ public class Resp<T> {
     }
 
     public static <T> Resp<T> success() {
-        return new Resp<>(200, "成功", null);
+        return new Resp<>(200, "success", null);
     }
 
     public static <T> Resp<T> fail(int code, String msg) {
@@ -36,7 +36,7 @@ public class Resp<T> {
     }
 
     public static <T> Resp<T> fail() {
-        return new Resp<>(500, "失败", null);
+        return new Resp<>(500, "fail", null);
     }
 
     public static <T> Resp<T> unauthorized(String msg) {
