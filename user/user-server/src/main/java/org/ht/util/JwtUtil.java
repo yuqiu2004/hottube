@@ -7,12 +7,14 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.annotation.Resource;
 import org.ht.constant.Constant;
 import org.ht.model.properties.JwtProperties;
+import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+@Component
 public class JwtUtil {
 
     @Resource
