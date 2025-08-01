@@ -6,8 +6,16 @@ This is a video share platform which encourage people upload their original vide
 
 ## services
 
-- user:
-  - port: 8081
+- user
+  - port 8081
+- interact
+  - port 8082
+- video
+  - port 8083
+- browse
+  - port 8084
+- search
+  - port 8085
 
 ## Source
 
