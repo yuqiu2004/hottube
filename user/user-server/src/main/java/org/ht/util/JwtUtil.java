@@ -7,6 +7,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import javax.annotation.Resource;
 import org.ht.constant.Constant;
 import org.ht.model.properties.JwtProperties;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
@@ -19,6 +20,8 @@ public class JwtUtil {
 
     @Resource
     private JwtProperties properties;
+    @Autowired
+    private JwtProperties jwtProperties;
 
     public String createJWT(int uid) {
         Map<String, Object> claims = new HashMap<>();
@@ -53,6 +56,10 @@ public class JwtUtil {
                 .setExpiration(exp);
 
         return builder.compact();
+    }
+
+    public Claims parseJWT(String token) {
+        return parseJWT(jwtProperties.getSecretKey(), token);
     }
 
     /**

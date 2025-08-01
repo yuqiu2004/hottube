@@ -3,7 +3,6 @@ package org.ht.service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import javax.annotation.Resource;
 
-import org.apache.dubbo.config.annotation.DubboService;
 import org.ht.mapper.UserMapper;
 import org.ht.model.entity.User;
 import org.ht.model.request.RegisterRequest;
