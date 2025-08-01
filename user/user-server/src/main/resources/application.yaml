@@ -13,3 +13,9 @@ mybatis-plus:
 
 server:
   port: 8081
+
+minio:
+  endpoint: http://localhost:9000
+  accesskey: yuqiu
+  secretkey: yuqiu123
+  bucket: ht-user
