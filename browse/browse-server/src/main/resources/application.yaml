@@ -17,6 +17,11 @@ spring:
       database: ht-browse
       username: yuqiu
       password: yuqiu123
+  redis:
+    host: localhost
+    port: 63790
+    password: hottube
+    timeout: 6000ms
   rabbitmq:
     host: localhost
     port: 5672
