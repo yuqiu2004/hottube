@@ -53,3 +53,34 @@ docker run --name nacos-standalone-derby `
     -d nacos/nacos-server:latest
 
 ```
+
+# rabbitmq
+
+```shell
+docker run -d `
+  --name rabbitmq `
+  -p 5672:5672 `
+  -p 15672:15672 `
+  bitnami/rabbitmq:latest
+
+# set user & password
+docker exec -it rabbitmq bash
+rabbitmqctl add_user yuqiu yuqiu
+rabbitmqctl set_user_tags yuqiu administrator
+
+```
+
+
+
+# mongodb
+
+```shell
+docker run -d `
+  --name mongodb `
+  -p 27017:27017 `
+  -e MONGO_INITDB_ROOT_USERNAME=yuqiu `
+  -e MONGO_INITDB_ROOT_PASSWORD=yuqiu123 `
+  -v F:\docker\mongodb\data:/bitnami/mongodb/data/db `
+  bitnami/mongodb:latest
+  
+```
