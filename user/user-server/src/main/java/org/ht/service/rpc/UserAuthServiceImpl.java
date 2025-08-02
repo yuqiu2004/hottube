@@ -26,12 +26,19 @@ public class UserAuthServiceImpl implements UserAuthService {
 
     @Override
     public AuthResponse auth(String token) {
-        Claims claims = jwtUtil.parseJWT(token);
-        Integer uid = Integer.valueOf(claims.get(Constant.JWT_CLAIMS).toString());
-        User user = userMapper.selectById(uid);
-        UserAuthDTO userAuthDTO = new UserAuthDTO();
-        BeanUtils.copyProperties(user, userAuthDTO);
-        return AuthResponse.builder().userAuthDTO(userAuthDTO).build();
+        try {
+            Claims claims = jwtUtil.parseJWT(token);
+            Integer uid = Integer.valueOf(claims.get(Constant.JWT_CLAIMS).toString());
+            User user = userMapper.selectById(uid);
+            if (user != null) {
+                UserAuthDTO userAuthDTO = new UserAuthDTO();
+                BeanUtils.copyProperties(user, userAuthDTO);
+                return AuthResponse.pass(userAuthDTO);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return AuthResponse.reject();
     }
 
 }

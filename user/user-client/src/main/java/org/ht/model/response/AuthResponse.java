@@ -12,6 +12,15 @@ import org.ht.model.dto.UserAuthDTO;
 @NoArgsConstructor
 public class AuthResponse {
 
+    private boolean pass;
     private UserAuthDTO userAuthDTO;
+
+    public static AuthResponse pass(UserAuthDTO userAuthDTO) {
+        return AuthResponse.builder().pass(true).userAuthDTO(userAuthDTO).build();
+    }
+
+    public static AuthResponse reject() {
+        return AuthResponse.builder().pass(false).userAuthDTO(null).build();
+    }
 
 }
