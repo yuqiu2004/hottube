@@ -1,0 +1,10 @@
+server:
+  port: 8084
+
+dubbo:
+  registry:
+    register-mode: instance
+    address: nacos://localhost:8848
+
+cors:
+  sources: localhost
