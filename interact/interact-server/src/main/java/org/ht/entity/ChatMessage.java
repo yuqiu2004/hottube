@@ -1,4 +1,4 @@
-package org.ht.model.entity;
+package org.ht.entity;
 
 import java.time.LocalDateTime;
 
@@ -8,15 +8,15 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 /**
- * 分类实体类
+ * 聊天消息实体类
  * 
  * @author HotTube
  * @since 2024-01-01
  */
-@TableName(value ="category")
+@TableName(value ="chat_message")
 @Data
-public class Category {
-
+public class ChatMessage {
+    
     /**
      * 主键ID
      */
@@ -24,9 +24,19 @@ public class Category {
     private Long id;
 
     /**
-     * 分类名称
+     * 发送者ID
      */
-    private String name;
+    private Long senderId;
+
+    /**
+     * 接收者ID
+     */
+    private Long receiverId;
+
+    /**
+     * 消息内容
+     */
+    private String content;
 
     /**
      * 创建时间

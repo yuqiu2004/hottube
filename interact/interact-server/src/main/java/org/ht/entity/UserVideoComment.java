@@ -1,4 +1,4 @@
-package org.ht.model.entity;
+package org.ht.entity;
 
 import java.time.LocalDateTime;
 
@@ -8,15 +8,15 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 /**
- * 视频分类关系实体类
+ * 用户视频评论实体类
  * 
  * @author HotTube
  * @since 2024-01-01
  */
-@TableName(value ="video_category_relation")
+@TableName(value ="user_video_comment")
 @Data
-public class VideoCategoryRelation {
-
+public class UserVideoComment {
+    
     /**
      * 主键ID
      */
@@ -24,17 +24,32 @@ public class VideoCategoryRelation {
     private Long id;
 
     /**
+     * 用户ID
+     */
+    private Long userId;
+
+    /**
      * 视频ID
      */
     private Long videoId;
 
     /**
-     * 分类ID
+     * 父评论ID，用于回复功能
      */
-    private Long categoryId;
+    private Long parentId;
+
+    /**
+     * 评论内容
+     */
+    private String content;
 
     /**
      * 创建时间
      */
     private LocalDateTime createTime;
+
+    /**
+     * 更新时间
+     */
+    private LocalDateTime updateTime;
 }

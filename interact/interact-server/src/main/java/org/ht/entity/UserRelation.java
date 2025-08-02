@@ -1,4 +1,4 @@
-package org.ht.model.entity;
+package org.ht.entity;
 
 import java.time.LocalDateTime;
 
@@ -8,15 +8,15 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 /**
- * 分类实体类
+ * 用户关系实体类
  * 
  * @author HotTube
  * @since 2024-01-01
  */
-@TableName(value ="category")
+@TableName(value ="user_relation")
 @Data
-public class Category {
-
+public class UserRelation {
+    
     /**
      * 主键ID
      */
@@ -24,9 +24,19 @@ public class Category {
     private Long id;
 
     /**
-     * 分类名称
+     * 关注者ID
      */
-    private String name;
+    private Long followerId;
+
+    /**
+     * 被关注者ID
+     */
+    private Long followeeId;
+
+    /**
+     * 关系类型：1=关注，2=好友
+     */
+    private Integer relationType;
 
     /**
      * 创建时间
