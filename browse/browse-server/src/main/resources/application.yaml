@@ -8,3 +8,18 @@ dubbo:
 
 cors:
   sources: localhost
+
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: ht-browse
+      username: yuqiu
+      password: yuqiu123
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: yuqiu
+    password: yuqiu
+    virtual-host: /
