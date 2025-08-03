@@ -11,6 +11,8 @@ public class VideoRecord {
     @Id
     private String id;
 
+    private Integer videoId;
+
     /**
      * 视频标题
      */

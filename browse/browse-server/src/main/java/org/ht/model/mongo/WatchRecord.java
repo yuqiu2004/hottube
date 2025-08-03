@@ -4,8 +4,6 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.Instant;
-
 @Document(collection = "watch_record")
 @Data
 public class WatchRecord {
@@ -13,9 +11,9 @@ public class WatchRecord {
     @Id
     private String id;
 
-    private String userId;
+    private Integer userId;
 
-    private String videoId;
+    private Integer videoId;
 
     private long timestamp;
 
