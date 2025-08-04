@@ -17,7 +17,7 @@ CREATE TABLE video_metadata (
                                 p360_bitrate INT DEFAULT NULL,
                                 p360_exists TINYINT DEFAULT 0,
 
-                                duration_seconds INT DEFAULT 0,
+                                duration_seconds BIGINT DEFAULT 0,
                                 play_count BIGINT DEFAULT 0 COMMENT '播放量',
                                 creator_id BIGINT NOT NULL,
                                 status TINYINT DEFAULT 1 COMMENT '1=发布, 0=待审, 2=下架',

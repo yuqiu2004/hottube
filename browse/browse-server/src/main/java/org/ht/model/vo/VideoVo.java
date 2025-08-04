@@ -30,7 +30,7 @@ public class VideoVo {
     /**
      * 视频时长（秒）
      */
-    private Integer durationSeconds;
+    private Long durationSeconds;
 
     /**
      * 播放次数
@@ -40,6 +40,6 @@ public class VideoVo {
     /**
      * 创建者ID
      */
-    private Long creatorId;
+    private Integer creatorId;
 
 }

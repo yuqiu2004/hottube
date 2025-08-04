@@ -86,7 +86,7 @@ public class VideoMetadata {
     /**
      * 视频时长（秒）
      */
-    private Integer durationSeconds;
+    private Long durationSeconds;
 
     /**
      * 播放次数

@@ -11,7 +11,7 @@ public class VideoRecord {
     @Id
     private String id;
 
-    private Integer videoId;
+    private Long videoId;
 
     /**
      * 视频标题
@@ -31,10 +31,15 @@ public class VideoRecord {
     /**
      * 视频时长（秒）
      */
-    private int duration;
+    private long durationSeconds;
 
     /**
      * 视频观看数
      */
-    private int viewCount;
+    private long playCount;
+
+    /**
+     * 创建者id
+     */
+    private Integer creatorId;
 }

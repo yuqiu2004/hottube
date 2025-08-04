@@ -116,6 +116,10 @@ public class RedisUtil {
         redisTemplate.opsForSet().add(key, value);
     }
 
+    public void addSetValues(String key, Object... value) {
+        redisTemplate.opsForSet().add(key, value);
+    }
+
     // 从集合中移除值
     public void removeSetValue(String key, Object value) {
         redisTemplate.opsForSet().remove(key, value);

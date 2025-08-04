@@ -5,9 +5,11 @@ import org.ht.model.context.ContextData;
 import org.ht.model.dto.UserInfo;
 import org.ht.model.mongo.VideoRecord;
 import org.ht.model.response.BrowseRandomResponse;
+import org.ht.model.vo.VideoVo;
 import org.ht.repository.VideoRecordRepository;
 import org.ht.service.BrowseService;
 import org.ht.util.RedisUtil;
+import org.ht.util.TimeUtil;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -34,14 +36,29 @@ public class BrowseServiceImpl implements BrowseService {
     public BrowseRandomResponse random() {
         UserInfo userInfo = ContextData.getUserInfo();
         // 先从缓存获取已经推荐的视频
-        Set<Integer> rec = redisUtil.getSet(RedisKey.getVideoRecommendedKey(userInfo.getUid())).stream()
+        String recommendedKey = RedisKey.getVideoRecommendedKey(userInfo.getUid());
+        Set<Integer> rec = redisUtil.getSet(recommendedKey).stream()
                 .filter(Integer.class::isInstance)
                 .map(Integer.class::cast)
                 .collect(Collectors.toSet());
         // 从mongo中去重搜索
         List<VideoRecord> list = getNotRecAndNotWatchVideo(rec, userInfo.getUid());
+        // 插入redis
+        redisUtil.addSetValues(recommendedKey, list.stream().map(VideoRecord::getVideoId).collect(Collectors.toList()).toArray());
+        redisUtil.expire(recommendedKey, TimeUtil.getTodayRemainSeconds());
         // 组装返回
-        return null;
+        List<VideoVo> videoVoList = list.stream().map(videoRecord -> {
+            return VideoVo.builder()
+                    .id(videoRecord.getVideoId())
+                    .title(videoRecord.getTitle())
+                    .description(videoRecord.getDescription())
+                    .coverUrl(videoRecord.getCoverUrl())
+                    .creatorId(videoRecord.getCreatorId())
+                    .durationSeconds(videoRecord.getDurationSeconds())
+                    .playCount(videoRecord.getPlayCount())
+                    .build();
+        }).collect(Collectors.toList());
+        return BrowseRandomResponse.builder().videos(videoVoList).build();
     }
 
     public List<VideoRecord> getNotRecAndNotWatchVideo(Set<Integer> rec, Integer uid) {
@@ -55,7 +72,17 @@ public class BrowseServiceImpl implements BrowseService {
                 // 4. 随机抽样
                 Aggregation.sample(20)
         );
-        return mongoTemplate.aggregate(agg, "video_record", VideoRecord.class).getMappedResults();
+        List<VideoRecord> videoRecord = mongoTemplate.aggregate(agg, "video_record", VideoRecord.class).getMappedResults();
+        // 检查是否有20条 没有需要再查一次
+        if (videoRecord.size() < 20) {
+            Set<Long> collect = videoRecord.stream().map(VideoRecord::getVideoId).collect(Collectors.toSet());
+            agg = Aggregation.newAggregation(
+                    Aggregation.match(Criteria.where("videoId").nin(collect)),
+                    Aggregation.sample(20 - videoRecord.size())
+            );
+            videoRecord.addAll(mongoTemplate.aggregate(agg, "video_record", VideoRecord.class).getMappedResults());
+        }
+        return videoRecord;
     }
 
 }
