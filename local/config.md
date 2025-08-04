@@ -85,9 +85,11 @@ navicat连接
 docker run -d `
   --name mongodb `
   -p 27017:27017 `
-  -e MONGO_INITDB_ROOT_USERNAME=yuqiu `
-  -e MONGO_INITDB_ROOT_PASSWORD=yuqiu123 `
+  -e MONGO_ROOT_USERNAME=root `
+  -e MONGO_ROOT_PASSWORD=yuqiu123 `
   -v F:\docker\mongodb\data:/bitnami/mongodb/data/db `
+  -v F:\docker\mongodb\conf\mongodb.conf:/opt/bitnami/mongodb/conf/mongodb.conf `
   bitnami/mongodb:latest
   
 ```
+

@@ -26,9 +26,10 @@ spring:
     mongodb:
       host: localhost
       port: 27017
-      database: ht-browse
-      username: yuqiu
+      username: root
       password: yuqiu123
+      authentication-database: admin
+      database: ht-browse
   redis:
     host: localhost
     port: 63790

@@ -7,6 +7,7 @@ import org.ht.service.impl.BrowseServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Query;
 
 import javax.annotation.Resource;
 import java.util.*;
@@ -46,6 +47,12 @@ public class VideoRecTest {
         record.setVideoIds(watched);
         record.setTimestamp(System.currentTimeMillis());
         mongoTemplate.save(record);
+    }
+
+    @Test
+    public void clearMongodb() {
+        mongoTemplate.remove(new Query(), "video_record");
+        mongoTemplate.remove(new Query(), "watch_record");
     }
 
     @Test
