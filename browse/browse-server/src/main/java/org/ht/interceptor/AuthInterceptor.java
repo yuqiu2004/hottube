@@ -5,7 +5,7 @@ import org.ht.constant.Constant;
 import org.ht.model.context.ContextData;
 import org.ht.model.dto.UserInfo;
 import org.ht.model.response.AuthResponse;
-import org.ht.model.service.UserAuthService;
+import org.ht.service.UserRpcService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -18,13 +18,13 @@ import javax.servlet.http.HttpServletResponse;
 public class AuthInterceptor implements HandlerInterceptor {
 
     @DubboReference
-    private UserAuthService userAuthService;
+    private UserRpcService userRpcService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         try {
             String token = request.getHeader(Constant.TOKEN_NAME);
-            AuthResponse auth = userAuthService.auth(token);
+            AuthResponse auth = userRpcService.auth(token);
             if (auth.isPass()) {
                 UserInfo userInfo = new UserInfo();
                 BeanUtils.copyProperties(auth.getUserAuthDTO(), userInfo);

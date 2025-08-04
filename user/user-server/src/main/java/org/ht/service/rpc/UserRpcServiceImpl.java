@@ -7,7 +7,9 @@ import org.ht.mapper.UserMapper;
 import org.ht.model.dto.UserAuthDTO;
 import org.ht.model.entity.User;
 import org.ht.model.response.AuthResponse;
-import org.ht.model.service.UserAuthService;
+import org.ht.model.response.UserInfoResponse;
+import org.ht.model.vo.UserVo;
+import org.ht.service.UserRpcService;
 import org.ht.util.JwtUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -16,7 +18,7 @@ import javax.annotation.Resource;
 
 @Service
 @DubboService
-public class UserAuthServiceImpl implements UserAuthService {
+public class UserRpcServiceImpl implements UserRpcService {
 
     @Resource
     private JwtUtil jwtUtil;
@@ -39,6 +41,14 @@ public class UserAuthServiceImpl implements UserAuthService {
             e.printStackTrace();
         }
         return AuthResponse.reject();
+    }
+
+    @Override
+    public UserInfoResponse getUserInfo(Integer uid) {
+        User user = userMapper.selectById(uid);
+        UserVo userVo = new UserVo();
+        BeanUtils.copyProperties(user, userVo);
+        return UserInfoResponse.builder().userVo(userVo).build();
     }
 
 }

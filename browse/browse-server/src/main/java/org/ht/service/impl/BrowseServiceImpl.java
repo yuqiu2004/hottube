@@ -1,13 +1,17 @@
 package org.ht.service.impl;
 
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.ht.constant.RedisKey;
+import org.ht.mapper.VideoMetadataMapper;
 import org.ht.model.context.ContextData;
 import org.ht.model.dto.UserInfo;
+import org.ht.model.entity.VideoMetadata;
 import org.ht.model.mongo.VideoRecord;
 import org.ht.model.response.BrowseRandomResponse;
+import org.ht.model.response.UserInfoResponse;
 import org.ht.model.vo.VideoVo;
-import org.ht.repository.VideoRecordRepository;
 import org.ht.service.BrowseService;
+import org.ht.service.UserRpcService;
 import org.ht.util.RedisUtil;
 import org.ht.util.TimeUtil;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -27,10 +31,13 @@ public class BrowseServiceImpl implements BrowseService {
     private RedisUtil redisUtil;
 
     @Resource
-    private VideoRecordRepository videoRecordRepository;
+    private MongoTemplate mongoTemplate;
 
     @Resource
-    private MongoTemplate mongoTemplate;
+    private VideoMetadataMapper videoMetadataMapper;
+
+    @DubboReference
+    private UserRpcService userRpcService;
 
     @Override
     public BrowseRandomResponse random() {
@@ -47,15 +54,18 @@ public class BrowseServiceImpl implements BrowseService {
         redisUtil.addSetValues(recommendedKey, list.stream().map(VideoRecord::getVideoId).collect(Collectors.toList()).toArray());
         redisUtil.expire(recommendedKey, TimeUtil.getTodayRemainSeconds());
         // 组装返回
-        List<VideoVo> videoVoList = list.stream().map(videoRecord -> {
+        List<VideoVo> videoVoList = list.parallelStream().map(videoRecord -> {
+            VideoMetadata videoMetadata = videoMetadataMapper.selectById(videoRecord.getVideoId());
+            UserInfoResponse info = userRpcService.getUserInfo(videoRecord.getCreatorId());
             return VideoVo.builder()
-                    .id(videoRecord.getVideoId())
-                    .title(videoRecord.getTitle())
-                    .description(videoRecord.getDescription())
-                    .coverUrl(videoRecord.getCoverUrl())
-                    .creatorId(videoRecord.getCreatorId())
-                    .durationSeconds(videoRecord.getDurationSeconds())
-                    .playCount(videoRecord.getPlayCount())
+                    .id(videoMetadata.getId())
+                    .title(videoMetadata.getTitle())
+                    .description(videoMetadata.getDescription())
+                    .coverUrl(videoMetadata.getCoverUrl())
+                    .playCount(videoMetadata.getPlayCount())
+                    .durationSeconds(videoMetadata.getDurationSeconds())
+                    .creatorId(info.getUserVo().getUid())
+                    .nickname(info.getUserVo().getNickname())
                     .build();
         }).collect(Collectors.toList());
         return BrowseRandomResponse.builder().videos(videoVoList).build();

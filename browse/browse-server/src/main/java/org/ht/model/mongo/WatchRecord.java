@@ -17,6 +17,4 @@ public class WatchRecord {
 
     private List<Integer> videoIds;
 
-    private long timestamp;
-
 }

@@ -42,4 +42,9 @@ public class VideoVo {
      */
     private Integer creatorId;
 
+    /**
+     * 创建者nickname
+     */
+    private String nickname;
+
 }

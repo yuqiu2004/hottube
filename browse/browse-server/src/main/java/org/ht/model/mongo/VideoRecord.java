@@ -13,33 +13,5 @@ public class VideoRecord {
 
     private Long videoId;
 
-    /**
-     * 视频标题
-     */
-    private String title;
-
-    /**
-     * 视频描述
-     */
-    private String description;
-
-    /**
-     * 封面图链接
-     */
-    private String coverUrl;
-
-    /**
-     * 视频时长（秒）
-     */
-    private long durationSeconds;
-
-    /**
-     * 视频观看数
-     */
-    private long playCount;
-
-    /**
-     * 创建者id
-     */
     private Integer creatorId;
 }
