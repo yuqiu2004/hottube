@@ -1,5 +1,7 @@
 # mysql
 
+navicat 访问
+
 ```shell
 docker run -d `
   --name mysql `
@@ -24,6 +26,8 @@ docker run -d --name redis `
 
 # minio
 
+控制台：http://localhost:9001
+
 ```shell
 docker run -d --name minio `
   -p 9000:9000 `
@@ -38,7 +42,8 @@ docker run -d --name minio `
 
 # nacos
 
-> nacos&yuqiu
+> username=nacos & password=yuqiu
+控制台：http://localhost:7848
 
 ```shell
 docker run --name nacos-standalone-derby `
@@ -56,6 +61,8 @@ docker run --name nacos-standalone-derby `
 
 # rabbitmq
 
+控制台：http://localhost:15672
+
 ```shell
 docker run -d `
   --name rabbitmq `
@@ -70,9 +77,9 @@ rabbitmqctl set_user_tags yuqiu administrator
 
 ```
 
-
-
 # mongodb
+
+navicat连接
 
 ```shell
 docker run -d `
