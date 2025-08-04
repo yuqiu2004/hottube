@@ -1,5 +1,6 @@
 package org.ht.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.ht.constant.RedisKey;
 import org.ht.mapper.VideoMetadataMapper;
@@ -10,6 +11,9 @@ import org.ht.model.mongo.VideoRecord;
 import org.ht.model.mongo.WatchRecord;
 import org.ht.model.response.BrowseRandomResponse;
 import org.ht.model.response.UserInfoResponse;
+import org.ht.model.response.VideoDetailResponse;
+import org.ht.model.vo.UserVo;
+import org.ht.model.vo.VideoDetailVo;
 import org.ht.model.vo.VideoVo;
 import org.ht.repository.WatchRecordRepository;
 import org.ht.service.BrowseService;
@@ -84,6 +88,20 @@ public class BrowseServiceImpl implements BrowseService {
         Query query = new Query(Criteria.where("userId").is(uid));
         Update update = new Update().addToSet("videoIds", videoId);
         mongoTemplate.updateFirst(query, update, WatchRecord.class);
+        // 播放量增加
+        videoMetadataMapper.increasePlayCount(videoId);
+    }
+
+    @Override
+    public VideoDetailResponse detail(Long videoId) {
+        VideoMetadata videoMetadata = videoMetadataMapper.selectById(videoId);
+        VideoDetailVo videoDetailVo = new VideoDetailVo();
+        BeanUtil.copyProperties(videoMetadata, videoDetailVo);
+        UserVo userVo = userRpcService.getUserInfo(videoMetadata.getCreatorId()).getUserVo();
+        return VideoDetailResponse.builder()
+                .videoDetailVo(videoDetailVo)
+                .userVo(userVo)
+                .build();
     }
 
     public List<VideoRecord> getNotRecAndNotWatchVideo(Set<Integer> rec, Integer uid) {

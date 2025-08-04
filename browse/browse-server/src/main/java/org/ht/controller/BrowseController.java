@@ -3,6 +3,7 @@ package org.ht.controller;
 import org.ht.model.response.BrowseRandomResponse;
 import org.ht.model.response.CategoryQueryResponse;
 import org.ht.model.response.Resp;
+import org.ht.model.response.VideoDetailResponse;
 import org.ht.service.BrowseService;
 import org.ht.service.CategoryService;
 import org.springframework.web.bind.annotation.*;
@@ -33,5 +34,10 @@ public class BrowseController {
     public Resp<Void> recordWatched(@PathVariable Long videoId) {
         browseService.recordWatched(videoId);
         return Resp.success();
+    }
+
+    @GetMapping("/video/{videoId}")
+    public Resp<VideoDetailResponse> detail(@PathVariable Long videoId) {
+        return Resp.success(browseService.detail(videoId));
     }
 }
