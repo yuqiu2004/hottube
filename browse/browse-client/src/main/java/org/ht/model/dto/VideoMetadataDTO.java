@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Builder
 @AllArgsConstructor
@@ -82,5 +83,10 @@ public class VideoMetadataDTO {
      * 创建者ID
      */
     private Long creatorId;
+
+    /**
+     * 分类id
+     */
+    private List<Long> categoryIds;
 
 }

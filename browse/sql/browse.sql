@@ -32,6 +32,30 @@ CREATE TABLE category (
                           create_time DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
+-- insert data
+INSERT INTO category (name) VALUES
+                                ('电影'),
+                                ('电视剧'),
+                                ('综艺'),
+                                ('动漫'),
+                                ('纪录片'),
+                                ('音乐'),
+                                ('游戏'),
+                                ('体育'),
+                                ('新闻'),
+                                ('教育'),
+                                ('科技'),
+                                ('生活'),
+                                ('搞笑'),
+                                ('时尚'),
+                                ('旅游'),
+                                ('汽车'),
+                                ('母婴'),
+                                ('美食'),
+                                ('宠物'),
+                                ('短剧');
+
+
 -- 3. 视频-分类关系表（多对多）
 CREATE TABLE video_category_relation (
                                          id BIGINT PRIMARY KEY AUTO_INCREMENT,

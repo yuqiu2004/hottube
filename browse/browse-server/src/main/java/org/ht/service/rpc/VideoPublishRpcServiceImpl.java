@@ -3,8 +3,10 @@ package org.ht.service.rpc;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.date.LocalDateTimeUtil;
 import org.apache.dubbo.config.annotation.DubboService;
+import org.ht.mapper.VideoCategoryRelationMapper;
 import org.ht.mapper.VideoMetadataMapper;
 import org.ht.model.dto.VideoMetadataDTO;
+import org.ht.model.entity.VideoCategoryRelation;
 import org.ht.model.entity.VideoMetadata;
 import org.ht.model.mongo.VideoRecord;
 import org.ht.model.response.VideoPublishResponse;
@@ -24,6 +26,9 @@ public class VideoPublishRpcServiceImpl implements VideoPublishRpcService {
     @Resource
     private VideoRecordRepository videoRecordRepository;
 
+    @Resource
+    private VideoCategoryRelationMapper videoCategoryRelationMapper;
+
     @Override
     public VideoPublishResponse publish(VideoMetadataDTO videoMetadataDTO) {
         VideoMetadata videoMetadata = new VideoMetadata();
@@ -33,6 +38,13 @@ public class VideoPublishRpcServiceImpl implements VideoPublishRpcService {
         videoMetadata.setPlayCount(0L);
         videoMetadata.setStatus(1); // default temporary publish
         videoMetadataMapper.insert(videoMetadata);
+        // build category relation
+        for (Long categoryId : videoMetadataDTO.getCategoryIds()) {
+            VideoCategoryRelation videoCategoryRelation = new VideoCategoryRelation();
+            videoCategoryRelation.setVideoId(videoMetadata.getId());
+            videoCategoryRelation.setCategoryId(categoryId);
+            videoCategoryRelationMapper.insert(videoCategoryRelation);
+        }
         // insert into mongodb
         VideoRecord videoRecord = new VideoRecord();
         videoRecord.setVideoId(videoMetadata.getId());
