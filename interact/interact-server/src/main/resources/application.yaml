@@ -7,6 +7,10 @@ dubbo:
   registry:
     register-mode: instance
     address: nacos://localhost:8848
+  application:
+    name: ht-interact
+  protocol:
+    port: 28091
 
 cors:
   sources: localhost

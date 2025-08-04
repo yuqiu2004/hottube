@@ -20,12 +20,12 @@
     <dependencies>
         <dependency>
             <groupId>org.ht</groupId>
-            <artifactId>user-client</artifactId>
+            <artifactId>search-client</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>org.ht</groupId>
-            <artifactId>search-client</artifactId>
+            <artifactId>common</artifactId>
             <version>1.0</version>
         </dependency>
 

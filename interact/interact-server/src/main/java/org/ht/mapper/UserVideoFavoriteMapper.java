@@ -1,5 +1,6 @@
 package org.ht.mapper;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.ht.entity.UserVideoFavorite;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
@@ -9,6 +10,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author HotTube
  * @since 2024-01-01
  */
+@Mapper
 public interface UserVideoFavoriteMapper extends BaseMapper<UserVideoFavorite> {
 
 }

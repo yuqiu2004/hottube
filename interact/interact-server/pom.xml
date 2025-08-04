@@ -23,11 +23,6 @@
             <artifactId>interact-client</artifactId>
             <version>1.0</version>
         </dependency>
-        <dependency>
-            <groupId>org.ht</groupId>
-            <artifactId>user-client</artifactId>
-            <version>1.0</version>
-        </dependency>
         <!-- redis -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -38,7 +33,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-amqp</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.ht</groupId>
+            <artifactId>common</artifactId>
+            <version>1.0</version>
+        </dependency>
 
     </dependencies>
 

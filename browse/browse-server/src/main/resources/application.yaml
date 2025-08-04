@@ -2,11 +2,15 @@ server:
   port: 8084
 
 dubbo:
+  application:
+    name: ht-browse
   consumer:
     check: false
   registry:
     register-mode: instance
     address: nacos://localhost:8848
+  protocol:
+    port: 20890
 
 cors:
   sources: localhost

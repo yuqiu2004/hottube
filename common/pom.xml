@@ -3,14 +3,14 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.ht</groupId>
-        <artifactId>video</artifactId>
+        <artifactId>HotTube</artifactId>
         <version>1.0</version>
     </parent>
 
-    <artifactId>video-server</artifactId>
+    <artifactId>common</artifactId>
     <packaging>jar</packaging>
 
-    <name>video-server</name>
+    <name>common</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -20,13 +20,9 @@
     <dependencies>
         <dependency>
             <groupId>org.ht</groupId>
-            <artifactId>video-client</artifactId>
+            <artifactId>user-client</artifactId>
             <version>1.0</version>
         </dependency>
-        <dependency>
-            <groupId>org.ht</groupId>
-            <artifactId>common</artifactId>
-            <version>1.0</version>
-        </dependency>
+
     </dependencies>
 </project>

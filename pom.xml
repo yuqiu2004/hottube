@@ -14,6 +14,7 @@
     <module>interact</module>
     <module>search</module>
     <module>video</module>
+    <module>common</module>
   </modules>
 
   <properties>

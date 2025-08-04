@@ -1,6 +1,6 @@
 package org.ht.config;
 
-import org.ht.model.properties.CorsProperties;
+import org.ht.properties.CorsProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;

@@ -31,6 +31,8 @@ dubbo:
   registry:
     address: nacos://localhost:8848 # ?username=nacos&password=nacos
     register-mode: instance
+  protocol:
+    port: 20880
 
 # cors config
 cors:
