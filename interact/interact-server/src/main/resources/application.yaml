@@ -1,2 +1,35 @@
 server:
   port: 8082
+
+dubbo:
+  consumer:
+    check: false
+  registry:
+    register-mode: instance
+    address: nacos://localhost:8848
+
+cors:
+  sources: localhost
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath*:/mapper/**/*.xml
+  type-aliases-package: org.ht.model.entity
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:33060/ht-interact?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: yuqiu
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    host: localhost
+    port: 63790
+    password: hottube
+    timeout: 6000ms
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: yuqiu
+    password: yuqiu
+    virtual-host: /

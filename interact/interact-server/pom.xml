@@ -28,6 +28,17 @@
             <artifactId>user-client</artifactId>
             <version>1.0</version>
         </dependency>
+        <!-- redis -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <!-- rabbitmq -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+
 
     </dependencies>
 
