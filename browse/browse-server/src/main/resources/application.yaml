@@ -2,6 +2,8 @@ server:
   port: 8084
 
 dubbo:
+  consumer:
+    check: false
   registry:
     register-mode: instance
     address: nacos://localhost:8848
