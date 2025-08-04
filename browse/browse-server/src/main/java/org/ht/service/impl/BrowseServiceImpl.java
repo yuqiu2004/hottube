@@ -44,7 +44,7 @@ public class BrowseServiceImpl implements BrowseService {
         return null;
     }
 
-    private List<VideoRecord> getNotRecAndNotWatchVideo(Set<Integer> rec, Integer uid) {
+    public List<VideoRecord> getNotRecAndNotWatchVideo(Set<Integer> rec, Integer uid) {
         Aggregation agg = Aggregation.newAggregation(
                 // 1. 左表 video_record，右表 watch_record，左videoId，右videoIds
                 Aggregation.lookup("watch_record", "videoId", "videoIds", "watchRecords"),
