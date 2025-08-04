@@ -1,27 +1,17 @@
-package org.ht.model.entity;
+package org.ht.model.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.Data;
-
-/**
- * 视频元数据实体类
- * 
- * @author HotTube
- * @since 2024-01-01
- */
-@TableName(value ="video_metadata")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
-public class VideoMetadata {
-
-    /**
-     * 主键ID
-     */
-    @TableId(type = IdType.AUTO)
-    private Long id;
+public class VideoMetadataDTO {
 
     /**
      * 视频标题
@@ -89,27 +79,8 @@ public class VideoMetadata {
     private Long durationSeconds;
 
     /**
-     * 播放次数
-     */
-    private Long playCount;
-
-    /**
      * 创建者ID
      */
-    private Integer creatorId;
+    private Long creatorId;
 
-    /**
-     * 视频状态：1=发布, 0=待审, 2=下架
-     */
-    private Integer status;
-
-    /**
-     * 创建时间
-     */
-    private LocalDateTime createTime;
-
-    /**
-     * 更新时间
-     */
-    private LocalDateTime updateTime;
 }

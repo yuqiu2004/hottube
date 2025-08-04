@@ -5,4 +5,6 @@ import org.ht.model.response.Resp;
 
 public interface BrowseService {
     BrowseRandomResponse random();
+
+    void recordWatched(Long videoId);
 }

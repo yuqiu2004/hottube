@@ -7,9 +7,11 @@ import org.ht.model.context.ContextData;
 import org.ht.model.dto.UserInfo;
 import org.ht.model.entity.VideoMetadata;
 import org.ht.model.mongo.VideoRecord;
+import org.ht.model.mongo.WatchRecord;
 import org.ht.model.response.BrowseRandomResponse;
 import org.ht.model.response.UserInfoResponse;
 import org.ht.model.vo.VideoVo;
+import org.ht.repository.WatchRecordRepository;
 import org.ht.service.BrowseService;
 import org.ht.service.UserRpcService;
 import org.ht.util.RedisUtil;
@@ -17,6 +19,8 @@ import org.ht.util.TimeUtil;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -35,6 +39,9 @@ public class BrowseServiceImpl implements BrowseService {
 
     @Resource
     private VideoMetadataMapper videoMetadataMapper;
+
+    @Resource
+    private WatchRecordRepository watchRecordRepository;
 
     @DubboReference
     private UserRpcService userRpcService;
@@ -69,6 +76,14 @@ public class BrowseServiceImpl implements BrowseService {
                     .build();
         }).collect(Collectors.toList());
         return BrowseRandomResponse.builder().videos(videoVoList).build();
+    }
+
+    @Override
+    public void recordWatched(Long videoId) {
+        int uid = ContextData.getUserInfo().getUid();
+        Query query = new Query(Criteria.where("userId").is(uid));
+        Update update = new Update().addToSet("videoIds", videoId);
+        mongoTemplate.updateFirst(query, update, WatchRecord.class);
     }
 
     public List<VideoRecord> getNotRecAndNotWatchVideo(Set<Integer> rec, Integer uid) {

@@ -1,5 +1,7 @@
 package org.ht.service;
 
+import org.ht.model.response.CategoryQueryResponse;
+
 /**
  * 分类Service接口
  * 
@@ -8,4 +10,5 @@ package org.ht.service;
  */
 public interface CategoryService {
 
+    CategoryQueryResponse getAllCategories();
 }
