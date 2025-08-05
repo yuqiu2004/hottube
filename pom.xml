@@ -50,6 +50,10 @@
       <groupId>com.baomidou</groupId>
       <artifactId>mybatis-plus-boot-starter</artifactId>
     </dependency>
+    <dependency>
+      <groupId>com.baomidou</groupId>
+      <artifactId>mybatis-plus-jsqlparser</artifactId>
+    </dependency>
     <!--hutool工具包-->
     <dependency>
       <groupId>cn.hutool</groupId>
@@ -78,6 +82,11 @@
         <groupId>com.baomidou</groupId>
         <artifactId>mybatis-plus-boot-starter</artifactId>
         <version>3.5.3.1</version>
+      </dependency>
+      <dependency>
+        <groupId>com.baomidou</groupId>
+        <artifactId>mybatis-plus-jsqlparser</artifactId>
+        <version>3.5.9</version>
       </dependency>
       <dependency>
         <groupId>cn.hutool</groupId>

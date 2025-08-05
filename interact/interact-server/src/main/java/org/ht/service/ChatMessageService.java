@@ -1,7 +1,6 @@
 package org.ht.service;
 
-import org.ht.entity.ChatMessage;
-import com.baomidou.mybatisplus.extension.service.IService;
+import org.ht.model.response.MessageResponse;
 
 /**
  * 聊天消息Service接口
@@ -9,6 +8,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author HotTube
  * @since 2024-01-01
  */
-public interface ChatMessageService extends IService<ChatMessage> {
+public interface ChatMessageService {
 
+    MessageResponse getHistoryMessages(Integer fid, int current, int size);
 }

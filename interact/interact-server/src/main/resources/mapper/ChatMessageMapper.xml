@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.ht.mapper.ChatMessageMapper">
 
-    <resultMap id="BaseResultMap" type="org.ht.entity.ChatMessage">
+    <resultMap id="BaseResultMap" type="org.ht.model.entity.ChatMessage">
             <id property="id" column="id" />
             <result property="senderId" column="sender_id" />
             <result property="receiverId" column="receiver_id" />

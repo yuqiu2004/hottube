@@ -1,4 +1,4 @@
-package org.ht.entity;
+package org.ht.model.entity;
 
 import java.time.LocalDateTime;
 
@@ -8,14 +8,14 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 /**
- * 用户视频收藏实体类
+ * 用户视频评论实体类
  * 
  * @author HotTube
  * @since 2024-01-01
  */
-@TableName(value ="user_video_favorite")
+@TableName(value ="user_video_comment")
 @Data
-public class UserVideoFavorite {
+public class UserVideoComment {
     
     /**
      * 主键ID
@@ -26,7 +26,7 @@ public class UserVideoFavorite {
     /**
      * 用户ID
      */
-    private Long userId;
+    private Integer userId;
 
     /**
      * 视频ID
@@ -34,9 +34,14 @@ public class UserVideoFavorite {
     private Long videoId;
 
     /**
-     * 收藏状态：1=已收藏，0=未收藏
+     * 父评论ID，用于回复功能
      */
-    private Integer status;
+    private Long parentId;
+
+    /**
+     * 评论内容
+     */
+    private String content;
 
     /**
      * 创建时间

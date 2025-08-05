@@ -1,6 +1,6 @@
 package org.ht.service;
 
-import org.ht.entity.UserVideoFavorite;
+import org.ht.model.entity.UserVideoFavorite;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -9,6 +9,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author HotTube
  * @since 2024-01-01
  */
-public interface UserVideoFavoriteService extends IService<UserVideoFavorite> {
+public interface UserVideoFavoriteService {
 
+    void favoriteVideo(Long videoId);
+
+    void unfavoriteVideo(Long videoId);
 }

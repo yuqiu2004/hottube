@@ -1,7 +1,7 @@
 package org.ht.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.ht.entity.UserVideoLike;
+import org.ht.model.entity.UserVideoLike;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

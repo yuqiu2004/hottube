@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.ht.mapper.UserVideoCommentMapper">
 
-    <resultMap id="BaseResultMap" type="org.ht.entity.UserVideoComment">
+    <resultMap id="BaseResultMap" type="org.ht.model.entity.UserVideoComment">
             <id property="id" column="id" />
             <result property="userId" column="user_id" />
             <result property="videoId" column="video_id" />

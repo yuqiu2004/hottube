@@ -1,7 +1,7 @@
 package org.ht.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.ht.entity.ChatMessage;
+import org.ht.model.entity.ChatMessage;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

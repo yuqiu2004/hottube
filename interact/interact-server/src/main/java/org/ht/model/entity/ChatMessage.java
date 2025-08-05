@@ -1,4 +1,4 @@
-package org.ht.entity;
+package org.ht.model.entity;
 
 import java.time.LocalDateTime;
 
@@ -26,12 +26,12 @@ public class ChatMessage {
     /**
      * 发送者ID
      */
-    private Long senderId;
+    private Integer senderId;
 
     /**
      * 接收者ID
      */
-    private Long receiverId;
+    private Integer receiverId;
 
     /**
      * 消息内容

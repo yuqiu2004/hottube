@@ -1,6 +1,6 @@
 package org.ht.service;
 
-import org.ht.entity.UserVideoLike;
+import org.ht.model.entity.UserVideoLike;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -9,6 +9,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author HotTube
  * @since 2024-01-01
  */
-public interface UserVideoLikeService extends IService<UserVideoLike> {
+public interface UserVideoLikeService {
 
+    void likeVideo(Long videoId);
+
+    void unlikeVideo(Long videoId);
 }
