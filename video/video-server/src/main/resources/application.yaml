@@ -1,2 +1,33 @@
 server:
   port: 8083
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:33060/ht-video?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: yuqiu
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath*:/mapper/**/*.xml
+  type-aliases-package: org.ht.model.entity
+
+minio:
+  endpoint: http://localhost:9000
+  accesskey: yuqiu
+  secretkey: yuqiu123
+  bucket: ht-user
+
+dubbo:
+  application:
+    name: ht-video
+  registry:
+    address: nacos://localhost:8848 # ?username=nacos&password=nacos
+    register-mode: instance
+  protocol:
+    port: 0
+
+# cors config
+cors:
+  sources: localhost

@@ -8,14 +8,12 @@ This is a video share platform which encourage people upload their original vide
 
 - user
   - port 8081
-  - rpc port 28080
 - interact
   - port 8082
 - video
   - port 8083
 - browse
   - port 8084
-  - rpc port 28090
 - search
   - port 8085
 

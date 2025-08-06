@@ -10,7 +10,7 @@ dubbo:
     register-mode: instance
     address: nacos://localhost:8848
   protocol:
-    port: 20890
+    port: 0
 
 cors:
   sources: localhost

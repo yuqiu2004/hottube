@@ -10,7 +10,7 @@ dubbo:
   application:
     name: ht-interact
   protocol:
-    port: 28091
+    port: 0
 
 cors:
   sources: localhost
