@@ -11,7 +11,6 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
-@Component
 public class VideoUtil {
 
     /**
@@ -44,30 +43,36 @@ public class VideoUtil {
      * @param bitrate 视频码率（bps）
      */
     public static void transcodeVideo(String inputPath, String outputPath, int width, int height, int bitrate) throws Exception {
-        try (FFmpegFrameGrabber grabber = new FFmpegFrameGrabber(inputPath);
-             FFmpegFrameRecorder recorder = new FFmpegFrameRecorder(outputPath, width, height, grabber.getAudioChannels())) {
-
+        try (FFmpegFrameGrabber grabber = new FFmpegFrameGrabber(inputPath)) {
             grabber.start();
 
-            recorder.setVideoCodec(avcodec.AV_CODEC_ID_H264);
-            recorder.setFormat("mp4");
-            recorder.setFrameRate(grabber.getFrameRate());
-            recorder.setVideoBitrate(bitrate);
+            try (FFmpegFrameRecorder recorder = new FFmpegFrameRecorder(outputPath, width, height, grabber.getAudioChannels())) {
+                recorder.setVideoCodec(avcodec.AV_CODEC_ID_H264);
+                recorder.setFormat("mp4");
+                recorder.setFrameRate(grabber.getFrameRate());
+                recorder.setVideoBitrate(bitrate);
 
-            recorder.setAudioCodec(avcodec.AV_CODEC_ID_AAC);
-            recorder.setAudioBitrate(grabber.getAudioBitrate());
+                recorder.setAudioCodec(avcodec.AV_CODEC_ID_AAC);
+                recorder.setAudioBitrate(grabber.getAudioBitrate());
 
-            recorder.start();
+                recorder.start();
 
-            Frame frame;
-            while ((frame = grabber.grab()) != null) {
-                recorder.record(frame);
+                Frame frame;
+                while ((frame = grabber.grab()) != null) {
+                    if (frame.image != null) {
+                        recorder.record(frame);
+                    } else if (frame.samples != null) {
+                        recorder.recordSamples(frame.sampleRate, frame.audioChannels, frame.samples);
+                    }
+                }
+
+                recorder.stop();
             }
 
-            recorder.stop();
             grabber.stop();
         }
     }
+
 
     /**
      * 转换视频为 HLS 格式
