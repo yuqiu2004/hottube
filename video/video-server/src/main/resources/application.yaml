@@ -17,7 +17,7 @@ minio:
   endpoint: http://localhost:9000
   accesskey: yuqiu
   secretkey: yuqiu123
-  bucket: ht-user
+  bucket: ht-video
 
 dubbo:
   application:

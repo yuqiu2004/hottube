@@ -25,9 +25,11 @@ But from project architecture to function depth, it will be quite different from
 
 ## Dev Environment
 
-- Oracle Java17
+- Java8
 - Intellij IDEA 2024
-- Git DockerDesktop Maven etc.
+- Git
+- DockerDesktop
+- Maven etc.
 
 ## Project Architecture
 
