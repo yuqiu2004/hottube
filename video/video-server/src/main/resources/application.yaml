@@ -6,6 +6,17 @@ spring:
     username: root
     password: yuqiu
     driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    host: localhost
+    port: 63790
+    password: hottube
+    timeout: 6000ms
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: yuqiu
+    password: yuqiu
+    virtual-host: /
 
 mybatis-plus:
   configuration:
@@ -15,8 +26,8 @@ mybatis-plus:
 
 minio:
   endpoint: http://localhost:9000
-  accesskey: yuqiu
-  secretkey: yuqiu123
+  accessKey: yuqiu
+  secretKey: yuqiu123
   bucket: ht-video
 
 dubbo:
@@ -31,3 +42,7 @@ dubbo:
 # cors config
 cors:
   sources: localhost
+
+video:
+  base: /ht/video
+  chunkSize: 5
