@@ -82,7 +82,7 @@ public class VideoMetadataDTO {
     /**
      * 创建者ID
      */
-    private Long creatorId;
+    private Integer creatorId;
 
     /**
      * 分类id

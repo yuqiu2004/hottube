@@ -6,7 +6,7 @@ CREATE TABLE video_metadata (
                                 cover_url VARCHAR(512),
 
                                 original_url VARCHAR(512) DEFAULT NULL,
-                                original_bitrate INT DEFAULT NULL,                 -- kbps
+                                original_bitrate INT DEFAULT NULL,                 -- bps
                                 original_exists TINYINT DEFAULT 0,                 -- 1存在，0不存在
 
                                 p720_url VARCHAR(512) DEFAULT NULL,

@@ -8,9 +8,9 @@ import org.ht.model.dto.VideoMetadataDTO;
 import org.ht.model.dto.VideoTransDTO;
 import org.ht.model.properties.VideoProperties;
 import org.ht.model.response.InitUploadResponse;
-import org.ht.model.response.MergeChunksResponse;
 import org.ht.model.response.UploadChunkResponse;
 import org.ht.model.response.UploadMetadataResponse;
+import org.ht.util.LocalPathUtil;
 import org.ht.util.RedisUtil;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
@@ -36,6 +36,9 @@ public class VideoServiceImpl implements VideoService {
     @Resource
     private RabbitTemplate rabbitTemplate;
 
+    @Resource
+    private LocalPathUtil localPathUtil;
+
     @Override
     public InitUploadResponse initUpload(String filename, double size) {
         int uid = ContextData.getUserInfo().getUid();
@@ -57,7 +60,7 @@ public class VideoServiceImpl implements VideoService {
                     .build();
         }
         // 文件夹清空准备
-        String dir = getChunkDir(uid, filename);
+        String dir = localPathUtil.getVideoBaseDir(uid, filename);
         File file = new File(dir);
         createEmptyDir(file);
         // 准备响应
@@ -69,14 +72,10 @@ public class VideoServiceImpl implements VideoService {
                 .build();
     }
 
-    private String getChunkDir(int uid, String filename) {
-        return videoProperties.getBase() + "/" + uid + "/" + filename;
-    }
-
     @Override
     public UploadChunkResponse uploadChunk(MultipartFile file, String filename, int chunkIndex, int totalChunks) {
         int uid = ContextData.getUserInfo().getUid();
-        String path = getChunkDir(uid, filename) + "/chunk" + chunkIndex;
+        String path = localPathUtil.getChunkDir(uid, filename) + "/chunk" + chunkIndex;
         File chunkFile = new File(path);
         try {
             chunkFile.createNewFile();
@@ -95,7 +94,7 @@ public class VideoServiceImpl implements VideoService {
         // 检查是否完成
         int uid = ContextData.getUserInfo().getUid();
         long size = redisUtil.getSetSize(RedisKey.getUploadStatusKey(uid, filename));
-        String dir = getChunkDir(uid, filename);
+        String dir = localPathUtil.getChunkDir(uid, filename);
         File d = new File(dir);
         // 这里只检查是否完整 合并留到转码的时候一起完成
         return size == totalChunks && d.list().length == totalChunks;

@@ -22,6 +22,27 @@ public class MinioUtil {
     @Resource
     private MinioProperties properties;
 
+    /** todo 待测试
+     * 上传本地文件
+     * @return 返回完整访问路径
+     */
+    public String uploadFile(String localFilePath, String objectName) {
+        try {
+            // 上传文件
+            minioClient.uploadObject(
+                    UploadObjectArgs.builder()
+                            .bucket(properties.getBucket())
+                            .object(objectName)
+                            .filename(localFilePath)
+                            .build()
+            );
+            return toUrl(objectName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public String toUrl(String objectName) {
         return properties.getEndpoint() + "/" + properties.getBucket() + "/" + objectName;
     }
