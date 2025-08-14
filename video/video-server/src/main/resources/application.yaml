@@ -38,7 +38,8 @@ dubbo:
     register-mode: instance
   protocol:
     port: 0
-
+  consumer:
+    check: false
 # cors config
 cors:
   sources: localhost

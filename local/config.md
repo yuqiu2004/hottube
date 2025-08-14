@@ -40,6 +40,18 @@ docker run -d --name minio `
 
 ```
 
+设置桶权限 
+
+参考 https://juejin.cn/post/7509891489692172351
+
+```shell
+mc alias set myminio http://localhost:9000 yuqiu yuqiu123
+
+mc anonymous set download myminio/ht-user
+mc anonymous set download myminio/ht-video
+
+```
+
 # nacos
 
 > username=nacos & password=yuqiu

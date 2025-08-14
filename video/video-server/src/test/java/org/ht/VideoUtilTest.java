@@ -26,7 +26,7 @@ public class VideoUtilTest {
 
     @Test
     public void testConvertToHLS() throws Exception {
-        VideoUtil.convertToHLS(videoPath, outputDir, segmentTime);
+        VideoUtil.convertToHLS(videoPath, outputDir+"/video.m3u8", outputDir);
     }
 
 }
