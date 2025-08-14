@@ -1,5 +1,6 @@
 package org.ht.service;
 
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.ht.model.dto.VideoMetadataDTO;
 import org.ht.model.dto.VideoTransDTO;
 import org.ht.util.LocalPathUtil;
@@ -20,6 +21,9 @@ public class VideoConvertServiceImpl implements VideoConvertService {
 
     @Resource
     private MinioUtil minioUtil;
+
+    @DubboReference
+    private VideoPublishRpcService videoPublishRpcService;
 
     @Override
     public void handle(VideoTransDTO transDTO) {
@@ -67,22 +71,47 @@ public class VideoConvertServiceImpl implements VideoConvertService {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        String p720M3u8Path = null, p720TsDir = null, p360M3u8Path = null, p360TsDir = null;
         try {
             // 720p
-            String p720M3u8Path = localPathUtil.get720pM3u8Path(uid, filename);
-            String p720TsDir = localPathUtil.get720pTsDir(uid, filename);
+            p720M3u8Path = localPathUtil.get720pM3u8Path(uid, filename);
+            p720TsDir = localPathUtil.get720pTsDir(uid, filename);
             if (VideoUtil.transAndConvertTo720p(targetFilePath, p720M3u8Path, p720TsDir)) metadata.setP720Exists(1);
             else metadata.setP720Exists(0);
 
             // 360p
-            String p360M3u8Path = localPathUtil.get360pM3u8Path(uid, filename);
-            String p360TsDir = localPathUtil.get360pTsDir(uid, filename);
+            p360M3u8Path = localPathUtil.get360pM3u8Path(uid, filename);
+            p360TsDir = localPathUtil.get360pTsDir(uid, filename);
             if (VideoUtil.transAndConvertTo360p(targetFilePath, p360M3u8Path, p360TsDir)) metadata.setP360Exists(1);
             else metadata.setP360Exists(0);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        // 上传minio 注入的路径都要是完整的路径 todo
+        // 上传minio 注入的路径都要是完整的路径
+        String coverUrl = minioUtil.uploadFile(imgPath, minioUtil.getCoverObjectName(uid, filename));
+        metadata.setCoverUrl(coverUrl);
+        String oriUrl = minioUtil.uploadFile(oriM3u8Path, minioUtil.getOriM3u8ObjectName(uid, filename));
+        uploadTsFile(oriTsDir, minioUtil.getOriTsDir(uid, filename));
+        metadata.setOriginalUrl(oriUrl);
+        if (metadata.getP720Exists() == 1) {
+            String p720Url = minioUtil.uploadFile(p720M3u8Path, minioUtil.getP720M3u8ObjectName(uid, filename));
+            uploadTsFile(p720TsDir, minioUtil.getP720TsDir(uid, filename));
+            metadata.setP720Url(p720Url);
+        }
+        if (metadata.getP360Exists() == 1) {
+            String p360Url = minioUtil.uploadFile(p360M3u8Path, minioUtil.getP360M3u8ObjectName(uid, filename));
+            uploadTsFile(p360TsDir, minioUtil.getP360TsDir(uid, filename));
+            metadata.setP360Url(p360Url);
+        }
+        // 调用rpc插入元数据
+        videoPublishRpcService.publish(metadata);
+    }
 
+    private void uploadTsFile(String oriTsDir, String prefix) {
+        File dir = new File(oriTsDir);
+        File[] files = dir.listFiles();
+        Arrays.stream(files).parallel().forEach( f -> {
+            minioUtil.uploadFile(f.getPath(), prefix + f.getName());
+        });
     }
 }

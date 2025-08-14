@@ -22,7 +22,7 @@ public class MinioUtil {
     @Resource
     private MinioProperties properties;
 
-    /** todo 待测试
+    /**
      * 上传本地文件
      * @return 返回完整访问路径
      */
@@ -199,5 +199,33 @@ public class MinioUtil {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public String getCoverObjectName(int uid, String filename) {
+        return uid + "/" + filename + "/cover.jpg";
+    }
+
+    public String getOriM3u8ObjectName(int uid, String filename) {
+        return uid + "/" + filename + "/ori.m3u8";
+    }
+
+    public String getP720M3u8ObjectName(int uid, String filename) {
+        return uid + "/" + filename + "/p720.m3u8";
+    }
+
+    public String getP360M3u8ObjectName(int uid, String filename) {
+        return uid + "/" + filename + "/p360.m3u8";
+    }
+
+    public String getOriTsDir(int uid, String filename) {
+        return uid + "/" + filename + "/ts_ori/";
+    }
+
+    public String getP720TsDir(int uid, String filename) {
+        return uid + "/" + filename + "/ts_720p/";
+    }
+
+    public String getP360TsDir(int uid, String filename) {
+        return uid + "/" + filename + "/ts_360p/";
     }
 }
