@@ -32,7 +32,7 @@ dubbo:
     address: nacos://localhost:8848 # ?username=nacos&password=nacos
     register-mode: instance
   protocol:
-    port: 0
+    port: -1
 
 # cors config
 cors:

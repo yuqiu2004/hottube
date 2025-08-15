@@ -110,3 +110,15 @@ docker run -d `
 ```shell
 
 ```
+
+# Nginx
+
+```shell
+docker run -d `
+  --name nginx `
+  -p 8090:80 `
+  -v F:\docker\nginx\html:/usr/share/nginx/html `
+  -v F:\docker\nginx\nginx.conf:/etc/nginx/nginx.conf `
+  nginx:stable-perl
+
+```

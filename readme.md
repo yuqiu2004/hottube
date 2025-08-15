@@ -43,6 +43,13 @@ But from project architecture to function depth, it will be quite different from
 
 - nginx: redirect all request to each service
 
+### Test
+
+test func list:
+- video upload
+- video play
+- video browse
+
 ## Tech Selection
 
 - service communication: Dubbo
