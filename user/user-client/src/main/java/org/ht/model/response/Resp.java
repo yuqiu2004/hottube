@@ -16,15 +16,15 @@ public class Resp<T> {
     }
 
     public static <T> Resp<T> success(T data) {
-        return new Resp<>(200, "success", data);
+        return new Resp<>(0, "success", data);
     }
 
     public static <T> Resp<T> success(String msg, T data) {
-        return new Resp<>(200, msg, data);
+        return new Resp<>(0, msg, data);
     }
 
     public static <T> Resp<T> success() {
-        return new Resp<>(200, "success", null);
+        return new Resp<>(0, "success", null);
     }
 
     public static <T> Resp<T> fail(int code, String msg) {
